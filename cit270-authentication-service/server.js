@@ -2,10 +2,11 @@ const express = require('express');
 const req = require('express/lib/request');
 const res = require('express/lib/response');
 const bodyParser = require('body-parser');
-
-
+const https = require('https')
+const app = express()
+const fs = require('fs')
+const md5 = require('md5');
 const port = 3000;
-
 const app = express();
 app.use(bodyParser.json());
 
@@ -13,7 +14,18 @@ app.get('/', (req, res) => {
     res.send("Hello Browser");
 });
 
-const md5 = require('md5');
+//...
+try{
+https.createServer({
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+}, app).listen(3000, () => {
+  console.log('Listening...')
+})} catch(error){
+    console.log(error)
+}
+
+
 
 app.post('/login', (req, res) =>{
     console.log(JSON.stringify(req.body));
@@ -24,4 +36,4 @@ app.post('/login', (req, res) =>{
     }
 });
 
-app.listen(port, ()=>{});
+// app.listen(port, ()=>{});
