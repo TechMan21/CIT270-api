@@ -7,7 +7,7 @@ const app = express()
 const fs = require('fs')
 const md5 = require('md5');
 const port = 3000;
-const app = express();
+// const app = express();
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
