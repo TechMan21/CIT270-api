@@ -1,2 +1,4 @@
 node_modules
 DOCS
+server.key
+server.cert
