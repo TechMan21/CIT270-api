@@ -6,7 +6,7 @@ const https = require('https')
 const app = express()
 const fs = require('fs')
 const md5 = require('md5');
-const port = 3000;
+const port = 443;
 // const app = express();
 app.use(bodyParser.json());
 
@@ -19,7 +19,7 @@ try{
 https.createServer({
   key: fs.readFileSync('server.key'),
   cert: fs.readFileSync('server.cert')
-}, app).listen(3000, () => {
+}, app).listen(port, () => {
   console.log('Listening...')
 })} catch(error){
     console.log(error)
