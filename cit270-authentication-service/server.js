@@ -7,6 +7,9 @@ const app = express()
 const fs = require('fs')
 const md5 = require('md5');
 const port = 443;
+
+app.use(express.static('public'));
+
 // const app = express();
 app.use(bodyParser.json());
 
