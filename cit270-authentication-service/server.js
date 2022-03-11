@@ -32,6 +32,7 @@ https.createServer({
 
 app.post('/login', (req, res) =>{
     console.log(JSON.stringify(req.body));
+    console.log("Correct login made " + req.body.password)
     if(req.body.userName == "dillanrawlings" && md5(req.body.password)== "10f2c9c97d658a44e423dc3528ffdb05"){
         res.send("Welcome!")
     }else{
