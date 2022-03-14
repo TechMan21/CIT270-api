@@ -8,6 +8,8 @@ const fs = require('fs')
 const md5 = require('md5');
 const port = 443;
 
+let Invalid_loginAttempts= 0;
+
 app.use(express.static('public'));
 
 // const app = express();
@@ -32,11 +34,17 @@ https.createServer({
 
 app.post('/login', (req, res) =>{
     console.log(JSON.stringify(req.body));
-    console.log("Correct login made " + req.body.password)
-    if(req.body.userName == "dillanrawlings" && md5(req.body.password)== "10f2c9c97d658a44e423dc3528ffdb05"){
+    console.log("Password given " + req.body.password)
+    if(Invalid_loginAttempts>=5){
+        res.status(403);// UNAUTHORIZED
+    }
+    else if(req.body.userName == "dillanrawlings" && md5(req.body.password)== "10f2c9c97d658a44e423dc3528ffdb05"){
         res.send("Welcome!")
     }else{
+        res.status(403);// UNAUTHORIZED
         res.send("Who are you?");
+        Invalid_loginAttempts +=1
+        console.log(Invalid_loginAttempts+ "invalid attempt made")
     }
 });
 
